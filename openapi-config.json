@@ -1,0 +1,7 @@
+{
+    "packageName": "datacatalog",
+    "projectName": "datacatalog-api",
+    "modelPropertyNaming": "camelCase",
+    "packageVersion": "0.0.1",
+    "packageUrl": "https://pypi.org/project/datacatalog-api/" 
+}
