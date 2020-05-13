@@ -717,6 +717,63 @@
         }
       }
     },
+    "/datasets/update_dataset": {
+      "post": {
+        "tags": [
+          "Datasets"
+        ],
+        "summary": "Update dataset",
+        "description": "",
+        "operationId": "updateDataset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dataset definition",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["id"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "Unique identifier"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "New display name/title of the dataset"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "new human-readable description of the dataset"
+                },
+                "metadata": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input (check error message(s) to correct it)"
+          },
+          "500": {
+            "description": "Internal error - please contact Dan Feldman danf@usc.edu"
+          }
+        }
+      }
+    },
     "/resources/get_resource_info": {
       "post": {
         "tags": [
@@ -797,6 +854,80 @@
         }
       }
     },
+    "/resources/update_resource": {
+      "post": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Update resource",
+        "description": "",
+        "operationId": "updateResource",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Resource definition",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["resource_id"],
+              "type": "object",
+              "required": [
+                "resource_id"
+              ],
+              "properties": {
+                "resource_id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "Unique identifier"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "New display name/title of the resource"
+                },
+                "resource_type": {
+                  "type": "string",
+                  "enum": [
+                    "GeoJSON",
+                    "NetCDF",
+                    "CSV",
+                    "GeoTIFF",
+                    "JSON",
+                    "SHP",
+                    "TXT",
+                    "<Write-in your own>"
+                  ]
+                },
+                "data_url": {
+                  "type": "string",
+                  "description": "New direct download url for this resource"
+                },
+                "metadata": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input (check error message(s) to correct it)"
+          },
+          "500": {
+            "description": "Internal error - please contact Dan Feldman danf@usc.edu"
+          }
+        }
+      }
+    },
     "/variables/get_variable_info": {
       "post": {
         "tags": [
@@ -866,6 +997,60 @@
         }
       }
     },
+    "/variables/update_variable": {
+      "post": {
+        "tags": [
+          "Variables"
+        ],
+        "summary": "Update variable",
+        "description": "",
+        "operationId": "updateVariable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dataset definition",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["variable_id"],
+              "properties": {
+                "variable_id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "Unique identifier"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "New display name/title/label of the variable"
+                },
+                "metadata": {
+                  "type": "object"
+                }
+              }
+
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input (check error message(s) to correct it)"
+          },
+          "500": {
+            "description": "Internal error - please contact Dan Feldman danf@usc.edu"
+          }
+        }
+      }
+    },
     "/knowledge_graph/register_standard_variables": {
       "post": {
         "tags": [
@@ -894,6 +1079,64 @@
                   "items": {
                     "$ref": "#/definitions/StandardVariable"
                   }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input (check error message(s) to correct it)"
+          },
+          "500": {
+            "description": "Internal error - please contact Dan Feldman danf@usc.edu"
+          }
+        }
+      }
+    },
+    "/standard_variables/update_standard_variable": {
+      "post": {
+        "tags": [
+          "StandardVariables"
+        ],
+        "summary": "Update standard variable",
+        "description": "",
+        "operationId": "updateStandardVariable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Standard variable definition",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["standard_variable_id"],
+              "properties": {
+                "standard_variable_id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "description": "Unique identifier"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "New display name/title/label of the standard variable"
+                },
+                "ontology": {
+                  "type": "string",
+                  "description": "New name of the ontology under which this standard variable is defined"
+                },
+                "uri": {
+                  "type": "string",
+                  "description": "New public URI that defines this standard variable"
                 }
               }
             }
